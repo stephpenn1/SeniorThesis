@@ -2,7 +2,7 @@
 
 install.packages(ncdf)
 library(ncdf)
-ncid <- nc_open("/Users/SP/Desktop/JGCRI/rhopoto_Omon_CESM1-BGC_rcp85_r1i1p1_200601-200912.nc")
+ncid <- nc_open("/Users/SP/Desktop/JGCRI/so_Omon_SP-CCSM4_rcp85_r1i1p1_200601-200912.nc")
 print(ncid)
 rho<-ncvar_get(ncid, "rhopoto")
 lon <-ncvar_get(ncid,"lon")
