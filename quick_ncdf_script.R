@@ -27,10 +27,10 @@ y<-lon_1-180  #changes the scale to -180/+180
 image(lon_sort,lat_1,x, 
       xlab= "Longitude", 
       ylab="Latitude", #axes labels
-      main="Potential Density", #main plot title
-      sub = "Plot of potential density in 2006",
+      sub = "Plot of potential density in 2006, 1st depth",
       font.sub = 3, col.sub = "cornflowerblue",
-      col = topo.colors(15, alpha =1)) #color palette
+      col = topo.colors(15, alpha =1))
+title(main = "Potential Density \nkg/m^3")
 
 # or
 contour(lon_sort,lat_1,x, 
@@ -40,10 +40,13 @@ contour(lon_sort,lat_1,x,
 
 # we see that the contours are 1030 ish which is a good density number. 
 
-
+#combine both plots into one
 image(lon_sort,lat_1,x,
+      xlab= "Longitude", 
+      ylab="Latitude", #axes labels
       col = topo.colors(15)) #color palette
-par(new = T)  #combines plots together
-contour(lon_sort,lat_1,x)
+title(main = "Potential Density \nkg/m^3")
+par(new = T)  #overlay plots
+contour(lon_sort,lat_1,x, add= TRUE)
 par(new = F)
 
