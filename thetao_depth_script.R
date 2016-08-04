@@ -7,9 +7,9 @@ lon <-ncvar_get(ncid,"lon")
 lat <-ncvar_get(ncid,"lat")
 time <-ncvar_get(ncid,"time")
 depth <- ncvar_get(ncid, "lev")
-
+temp<- temp-273.15
 #let's pull out the first level and the first date
-temp_depth<-temp[ ,258, , 1:12]  # the means we want all lat, one lon, all depths and 1-12 months 
+temp_depth<-temp[222, , , 1:12]  # the means we want all lat, one lon, all depths and 1-12 months 
 
 # takes the mean of the 3th dimension time
 mean_temp<-apply(temp_depth,c(1,2), mean) # this should return a 2-d matrix
@@ -23,5 +23,9 @@ lon_sort<-sort(lon_1)
 
 image.plot(lat_1,depth,mean_temp,
       xlab= "latitude", 
-      ylab="depth [M]") #axes labels)
+      ylab="depth [M]",
+      ylim = c(1500,0),
+      xlim = c(-70,0)) #axes labels
 title(main = "Potential Temperature with Depth")
+
+contour(lat_1,depth,mean_temp)
