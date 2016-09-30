@@ -52,7 +52,7 @@ image.plot(lat,depth,salt_u,
            xlim = c(-75,0), #only want equator to 75S
            ylim = c(2000,0), #only want top 2000 meters
            zlim = c(33.5,35), #changes colorbar range
-           col = rainbow(150, start = .15, end = .75, alpha =1)) #uses rainbow palette with 150 colors, hue ranges from .1 to .85
+           col = rainbow(150, start = .15, end = .75, alpha =1)) #uses rainbow palette with 150 colors, hue ranges from .15 to .75
 title(main = "Historic Salinity and Density in the Southern Pacific") #(kg/m^3)
 par(new = T)
 contour(lat_1,depth,rho_u, nlevels = 30, drawlabels = TRUE, add= TRUE)
