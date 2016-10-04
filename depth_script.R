@@ -57,5 +57,5 @@ image.plot(lat,depth,salt_u,
 title(main = "Historic Salinity in the Southern Pacific") #(kg/m^3)
 par(new = T)
 contour(lat,depth,salt_u, nlevels = 30, drawlabels = TRUE, add= TRUE)
-dev.off()
 par(new = F) #end overlay
+dev.off()
