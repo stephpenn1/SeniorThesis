@@ -49,8 +49,8 @@ temp_u<- temp_surf-273.15 #change units to celsius
 image.plot(lon,lat,temp_u, 
            xlab = "Longitude", 
            ylab = "Latitude",
-           ylim=rev(c(0 , -90)),
-           xlim=c(150,300),
+           #ylim=rev(c(0 , -90)), #S.Pacific
+           #xlim=c(150,300), #S.Pacific
            #zlim = c(33,34),
            sub = "Average Historic SST 1970-1990",
            font.sub = 3, col.sub = "firebrick2")
