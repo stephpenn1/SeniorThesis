@@ -1,16 +1,19 @@
 #Stephanie Pennington | Senior Thesis
+#Code to analyize CESM1-BGC output
 #Historic(1970-1990) and RCP8.5(2030-2050)
 #Salinity/Potential Density Data CMIP5 CESM1-BGC
 #Created 8-9-16 | Revised 1-26-17
 
 # ----- R code for depth plots w contours -----
 
+#install libraries
+library(fields)
+library(ncdf4)
+
 #set directory
 setwd("/Users/SP/Desktop/cmip5_files")
 
 ## --------------OPEN DATA ------------------
-
-library(ncdf4)
 
 #open the NetCDF files after averaged in CDO
 #Historic 1970-1990 outputs
@@ -31,7 +34,7 @@ depth <-ncvar_get(ncid, "lev")
 #temp <-ncvar_get(ncid2, "thetao")
 
 ## --------------PLOT DATA------------------
-library(fields)
+
 
 #all depths and one longitude
 salt_depth <-salt[240, , ]  #only three variables since time was averaged out
