@@ -16,8 +16,8 @@ d_sigma <- 0.5
 #FORMATION FOR 26.5 (denoted '_26')
 
 rho_index_26 <- which(rho_u_hist > 26.45 & rho_u_hist < 26.55)
-b_index_26 <- buoyancy_hist[rho_index]
-b_sum_26 <- sum(b_index)
+b_index_26 <- buoyancy_hist[rho_index_26]
+b_sum_26 <- sum(b_index_26)
 
 a_26 <- area_sp[rho_index_26]
 a_sum_26 <- sum(a_26)
