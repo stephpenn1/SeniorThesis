@@ -7,24 +7,26 @@
 #SURFACE PLOTS w CONTOURS
 # --------------------------------
 
-setwd("/Users/SP/Desktop/cmip5_files") #set working directory to files
+setwd("/Users/SP/Desktop/cmip5_files/spring/hfds") #set working directory to files
 
 ## --------------OPEN DATA ------------------
 library(ncdf4)
 
 # open the NetCDF files after it has gone through CDO
-ncid <- nc_open("so_hist_19701990.nc_regridfile.nc")
+ncid <- nc_open("tauu_Amon_CESM1-BGC_historical_r1i1p1_185001-200512.nc_avg_his.nc")
 
 #RCP8.5 2030-2050 outputs
-#ncid <- nc_open("thetao_rcp85_20302050.nc_regridfile.nc")
+ncid2 <- nc_open("rhopoto_hist_19701990.nc_regridfile.nc")
 
-#print(ncid)
+print(ncid)
 
 #pull out variables
-salt <-ncvar_get(ncid, "so")
-#rho <-ncvar_get(ncid, "rhopoto")
+#salt <-ncvar_get(ncid, "so")
+rho <-ncvar_get(ncid2, "rhopoto")
 #oxy <-ncvar_get(ncid,"o2")
-temp <-ncvar_get(ncid, "thetao")
+#temp <-ncvar_get(ncid, "thetao")
+#precip <-ncvar_get(ncid,"pr")
+stress <- ncvar_get(ncid, "tauu")
 lon <-ncvar_get(ncid,"lon")
 lat <-ncvar_get(ncid,"lat")
 time <-ncvar_get(ncid,"time")
@@ -37,26 +39,30 @@ library(fields)
 #pull out only the first level
 
 #oxy_surf<-oxy[ , 1]
-salt_surf<-salt[ , , 1]
-salt_u<- salt_surf*1000 #change units to 3 sig figs
-#rho_surf <- rho[ , , 1]
-#rho_u<- rho_surf-1000
+#salt_surf<-salt[ , , 1]
+#salt_u<- salt_surf*1000 #change units to 3 sig figs
+rho_surf <- rho[ , , 1]
+rho_u<- rho_surf-1000
 
+precip_u <- precip*86400
 #there are only three variables now instead of four since time was averaged out
 temp_surf<-temp[ , , 1]
 temp_u<- temp_surf-273.15 #change units to celsius
 
 #plot the data; the first dataset is in color and the second is contoured on top
-image.plot(lon,lat,salt_u, 
-           xlab = "Longitude", 
-           ylab = "Latitude",
-           #ylim=rev(c(0 , -90)), #S.Pacific
-           #xlim=c(150,300), #S.Pacific
-           #zlim = c(33,34),
+image.plot(lon,lat,stress,
+           xlab = "longitude", 
+           ylab = "latitude",
+           ylim=rev(c(-40 , -90)), #S.Pacific
+           xlim=c(150,300)) #S.Pacific
+           #zlim = c(0,10))
            #sub = "Average Historic SST 1970-1990",
-           font.sub = 3, col.sub = "firebrick2")
+           #font.sub = 3, col.sub = "firebrick2")
            #col = rainbow(150, start = .15, end = .75, alpha =1)) #axes labels
-title(main = "Average Historic Surface Temperature in Southern Pacific\n (Celsius)") #kg/m^3
+title(main = "South Pacific Average Historic Zonal Wind Stress\n1970-1990") #kg/m^3
 par(new = T)
-contour(lon,lat,temp_u, nlevels = 10, add = TRUE) #overlay contours
+map('world2', add = TRUE, ylim=rev(c(-30,-90)), xlim=c(120,300))
+par(new = T)
+z = c(26.4,27.4)
+contour(lon,lat,rho_u, nlevels = 5, add = TRUE, zlim= range(z, finite = TRUE)) #overlay contours
 par(new = F)

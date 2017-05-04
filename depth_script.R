@@ -31,7 +31,7 @@ lon <-ncvar_get(ncid,"lon")
 lat <-ncvar_get(ncid,"lat")
 time <-ncvar_get(ncid,"time")
 depth <- ncvar_get(ncid, "lev")
-#temp <-ncvar_get(ncid, "thetao")
+#temp <-ncvar_get(ncid2, "thetao")
 
 ## --------------PLOT DATA------------------
 library(fields)
@@ -43,7 +43,7 @@ salt_u<- salt_depth*1000 #change units to 3 sig figs
 rho_depth<-rho[240, , ]
 rho_u<- rho_depth-1000 #change units to 2 sig figs
 
-#temp_depth<-temp[210, , ]
+#temp_depth<-temp[240, , ]
 #temp_u<- temp_depth-273.15
 
 #plot data
@@ -58,6 +58,6 @@ image.plot(lat,depth,salt_u,
            col = rainbow(150, start = .15, end = .75, alpha =1)) #uses rainbow palette with 150 colors, hue ranges from .1 to .85
 title(main = "Average Historic Salinity - 120W") #(kg/m^3)
 par(new = T)
-contour(lat,depth,rho_u, nlevels = 23, drawlabels = TRUE, add= TRUE)
+contour(lat,depth,salt_u, nlevels = 30, drawlabels = TRUE, add= TRUE)
 par(new = F) #end overlay
 #dev.off()
